@@ -1,0 +1,103 @@
+# PR1_Zyablykh_ind_zadanie
+
+
+<script>
+var str = "++oneff++333+++fqwfertf+**-fdf1111++++adfad11++-*++qwertsfsdfsdf123asdasd123"; //сама строка для обработки
+var regexp = /[A-Z]+(?=\d)|[A-Z]+(?=\W)/gi;    //регулярное выражение для нахождения групп букв
+var matches = str.match(regexp);                 //применение выражения
+alert("Группы букв: "+matches+" Количество групп: "+matches.length);   //вывод на экран всех групп букв
+
+var regexp1 = /[0-9]+(?=\W)|[0-9]+(?=\w)/gi; //регулярное выражение для нахождения групп цифр
+var matches1 = str.match(regexp1);
+alert("Группы цифр: "+matches1+" Количество групп: "+matches1.length); 
+
+var regexp2 = /[+|-|*]+(?=\d)|[+|-|*]+(?=\w)/gi; //регулярное выражение для нахождения групп символов
+var matches2 = str.match(regexp2);
+alert("Группы символов: "+matches2+" Количество групп: "+matches2.length);
+//**********************************************************************************
+var count = 0;
+var one = /one/gi;    //регулярное выражение для нахождения групп букв
+for(j = 0;j < matches.length;j++)
+{
+var onem = matches[j].match(one);       
+if(onem!==null)
+{
+count = count + 1;
+}
+}
+alert("Группа one встречается в тексте "+count+" раз" );
+//******************************************************************************
+
+if(matches.length>matches2.length) //сравнение количества групп
+{
+alert('Групп букв больше чем групп знаков');
+}
+//*************************************************************************************
+
+if(matches.length>1)
+{
+var text = str.split(matches[1])[0].split(matches[0])[1]; // нахождение отрезка между двумя первыми группами букв
+var result = text.replace(/\+/g, "1"); //замена символов
+var result1 = result.replace(/\*/g, "3");
+var result2 = result1.replace(/\-/g, "2");
+alert("Исходная строка: "+text+", После замены: "+result2); //отображение результата
+}
+//***********************************************************************************
+
+var f = /f/gi;                              //рег выражение для нахождения вхождения буквы f
+var fmatches = matches[0].match(f);  // колво вхождений в перую группу
+var fmatches1 = matches[1].match(f); 
+var fmatches2 = matches[2].match(f);
+var vsego = new Number(fmatches.length + fmatches1.length+fmatches2.length) //подсчет всего
+alert("Всего вхождений буквы F в первые три группы: "+vsego); 
+
+//***************************************************************************************************
+
+var sovpad = 0;
+	for(j = 0;j< matches.length-1;j++) {  //цикл перебора элементов массива групп букв, сравнение их первых и последних символов.
+    var dl  = matches[j].length;
+      var dl1  = matches[j+1].length;
+    if(matches[j][0]==matches[j+1][0] && matches[j][dl-1]==matches[j+1][dl1-1])   //условие сравнения
+    {
+    sovpad = sovpad+1;
+    }
+}
+alert("Количество слов с одинаковым началом и концом: "+(sovpad+1));
+
+//***************************************************************************************
+
+var pen;
+var a = /a/gi;     				//рег выражения для поиска а
+for(j = 0; j < matches.length;j++) { 
+
+ pen = matches[j].match(a);
+if(pen!==null && pen.length > 1)			//проверяем вхождение что бы больше 2х раз
+{
+alert(" (А встречается от 2х раз: "+matches[j]+") ");
+}
+}
+
+//**************************************************************************8
+
+var arr = [];				//задаем массив
+arr["dakota"] = [];
+for(j = 0; j < matches1.length;j++) { 
+arr.dakota.push(matches1[j].length);   //заполняем длинами группами цифр
+
+}
+ function getMax(arr) {                //функция нахождения максимальной  длины
+    var arrLen = arr.length,
+        maxEl = arr[0];
+    for (var i = 0; i < arrLen; i++) {
+      if (maxEl < arr[i]) {
+        maxEl = arr[i];
+      }
+    }
+    return maxEl;
+  }
+  var a = getMax(arr["dakota"]);
+  //alert(a)
+  alert("Самая длинная группа цифр: "+matches1[arr["dakota"].indexOf(a)]); //получили по значению индекс самой длинной группы
+//*********************************************************************************
+</script>
+
